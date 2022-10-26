@@ -23,8 +23,10 @@ run
 ### Example input
 
 **Please input tennis players such as 'Lisa VS Jennie'. The 1st player will be the one who serve first.**
+<br>
 -> Lisa VS Jennie
 **Please input the tennis match data.**
+<br>
 -> [
     Lisa, Lisa, Jennie, Lisa, Lisa,
     Lisa, Jennie, Lisa, Lisa, Jennie, Jennie, Lisa,
@@ -34,6 +36,7 @@ run
     Lisa, Lisa, Lisa, Lisa,
     Lisa, Lisa, Lisa, Lisa,
 ]
+<br>
 **Result**
 Lisa Serve 1-0
 15:0, 30:0, 30:15, 40:15BP
