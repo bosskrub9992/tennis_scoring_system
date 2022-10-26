@@ -9,7 +9,7 @@
 run
 
 ```sh
-    go run main.go
+go run main.go
 ```
 
 ### To run via built binary file
@@ -17,7 +17,7 @@ run
 run
 
 ```sh
-    ./tennis_scoring_system
+./tennis_scoring_system
 ```
 
 ### Example input
