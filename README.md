@@ -46,23 +46,23 @@ Lisa VS Jennie
 
 ```string
 Lisa Serve 1-0
-15:0, 30:0, 30:15, 40:15BP
+15:0, 30:0, 30:15, 40:15
 
-Lisa Serve 2-0
+Jennie Serve 2-0
 15:0, 15:15, 30:15, 40:15BP, 40:30BP, 40:40
 
 Lisa Serve 2-1
 15:0, 15:15, 30:15, 30:30, 30:40BP, 40:40, 40:ABP
 
-Lisa Serve 3-1
+Jennie Serve 3-1
 15:0, 30:0, 40:0BP
 
 Lisa Serve 4-1
-15:0, 30:0, 40:0BP
+15:0, 30:0, 40:0
 
-Lisa Serve 5-1
+Jennie Serve 5-1
 15:0, 30:0, 40:0BP
 
 Lisa Serve 6-1
-15:0SP, 30:0SP, 40:0BPSP
+15:0SP, 30:0SP, 40:0SP
 ```

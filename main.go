@@ -37,7 +37,7 @@ func main() {
 	}
 
 	player1 := players[0]
-	player2 := players[0]
+	player2 := players[1]
 
 	// input match data
 	fmt.Println("Please input the tennis match data.")
@@ -60,6 +60,7 @@ func main() {
 	raw = strings.TrimSpace(raw)
 	rawMatch := strings.Split(raw, "\n")
 	for _, rawSet := range rawMatch {
+		rawSet = strings.TrimSpace(rawSet)
 		set := strings.Split(rawSet, ",")
 		match = append(match, set)
 	}
@@ -72,7 +73,7 @@ func main() {
 		}
 	}
 	if len(uniquePlayers) > 2 {
-		logger.Error(ErrMoreThan2PlayersInData)
+		logger.Errorf("error more than 2 player detected: %+v", uniquePlayers)
 		return
 	}
 	if _, found := uniquePlayers[player1]; !found {
