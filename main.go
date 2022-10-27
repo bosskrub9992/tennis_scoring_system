@@ -133,11 +133,17 @@ func main() {
 					if servePlayer == player1 {
 						BP = "BP"
 					}
+					if player1WinSetCount == 5 || player2WinSetCount == 5 {
+						SP = "SP"
+					}
 				case player1WinGameCount > player2WinGameCount:
 					player1GameScore = "A"
 					player2GameScore = "40"
 					if servePlayer == player2 {
 						BP = "BP"
+					}
+					if player1WinSetCount == 5 || player2WinSetCount == 5 {
+						SP = "SP"
 					}
 				default:
 					player1GameScore = "40"
@@ -148,8 +154,11 @@ func main() {
 				(servePlayer == player1 && player1WinGameCount < 3 && player2WinGameCount == 3) {
 				BP = "BP"
 			}
-			if player1WinSetCount == 5 || player2WinSetCount == 5 {
-				SP = "SP"
+			if (player1WinGameCount == 3 && player2WinGameCount < 3) ||
+				(player1WinGameCount < 3 && player2WinGameCount == 3) {
+				if player1WinSetCount == 5 || player2WinSetCount == 5 {
+					SP = "SP"
+				}
 			}
 			if setIndex != len(set)-1 {
 				gameScores = append(gameScores, fmt.Sprintf("%s:%s%s%s", player1GameScore, player2GameScore, BP, SP))

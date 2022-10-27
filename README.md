@@ -64,5 +64,5 @@ Jennie Serve 5-1
 15:0, 30:0, 40:0BP
 
 Lisa Serve 6-1
-15:0SP, 30:0SP, 40:0SP
+15:0, 30:0, 40:0SP
 ```
