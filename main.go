@@ -91,8 +91,8 @@ func main() {
 			player2GameScore := ""
 			BP := ""
 			SP := ""
-			player1AlmostWin := false
-			player2AlmostWin := false
+			player1AlmostWinThisSet := false
+			player2AlmostWinThisSet := false
 
 			if gameWinner == player1 {
 				player1WinGameCount++
@@ -124,36 +124,34 @@ func main() {
 
 			switch {
 			case player1WinGameCount == 3 && player2WinGameCount < 3:
-				player1AlmostWin = true
+				player1AlmostWinThisSet = true
 			case player1WinGameCount < 3 && player2WinGameCount == 3:
-				player2AlmostWin = true
-			}
-
-			if player1WinGameCount >= 3 && player2WinGameCount >= 3 {
+				player2AlmostWinThisSet = true
+			case player1WinGameCount >= 3 && player2WinGameCount >= 3:
 				switch {
 				case player1WinGameCount < player2WinGameCount:
 					player1GameScore = "40"
 					player2GameScore = "A"
-					player2AlmostWin = true
+					player2AlmostWinThisSet = true
 				case player1WinGameCount > player2WinGameCount:
 					player1GameScore = "A"
 					player2GameScore = "40"
-					player1AlmostWin = true
+					player1AlmostWinThisSet = true
 				default:
 					player1GameScore = "40"
 					player2GameScore = "40"
 				}
 			}
 
-			if player1AlmostWin && servePlayer == player2 {
+			if player1AlmostWinThisSet && servePlayer == player2 {
 				BP = "BP"
 			}
 
-			if player2AlmostWin && servePlayer == player1 {
+			if player2AlmostWinThisSet && servePlayer == player1 {
 				BP = "BP"
 			}
 
-			if player1AlmostWin || player2AlmostWin {
+			if player1AlmostWinThisSet || player2AlmostWinThisSet {
 				if player1WinSetCount == 5 || player2WinSetCount == 5 {
 					SP = "SP"
 				}
