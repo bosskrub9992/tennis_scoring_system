@@ -2,7 +2,6 @@ package main
 
 import (
 	"bufio"
-	"errors"
 	"fmt"
 	"os"
 	"strings"
@@ -10,19 +9,13 @@ import (
 	"github.com/bosskrub9992/tennis_scoring_system/loggers"
 )
 
-var (
-	ErrLessThan2Players          = errors.New("less than 2 players")
-	ErrMoreThan2PlayersInData    = errors.New("more than 2 players in data")
-	ErrPlayerNotFoundInMatchData = errors.New("player not found in match data")
-)
-
 func main() {
+
 	logger := loggers.New()
 	reader := bufio.NewReader(os.Stdin)
 
-	// input players
-	fmt.Println("Please input tennis players such as 'Lisa VS Jennie'. The 1st player will be the one who serve first.")
-	fmt.Print("-> ")
+	// input players data
+	fmt.Printf("Please input tennis players such as 'Lisa VS Jennie'. The 1st player will be the one who serve first.\n-> ")
 	rawPlayers, err := reader.ReadString('\n')
 	if err != nil {
 		logger.Error(err)
@@ -32,7 +25,7 @@ func main() {
 	rawPlayers = strings.TrimSpace(rawPlayers)
 	players := strings.Split(rawPlayers, " VS ")
 	if len(players) < 2 {
-		logger.Error(ErrLessThan2Players)
+		logger.Error("invalid input")
 		return
 	}
 
@@ -40,8 +33,7 @@ func main() {
 	player2 := players[1]
 
 	// input match data
-	fmt.Println("Please input the tennis match data.")
-	fmt.Print("-> ")
+	fmt.Printf("Please input the tennis match data.\n-> ")
 	raw, err := reader.ReadString(']')
 	if err != nil {
 		logger.Error(err)
@@ -50,7 +42,6 @@ func main() {
 
 	var match [][]string
 
-	// clean data
 	raw = strings.Replace(raw, "[", "", 1)
 	raw = strings.Replace(raw, "]", "", 1)
 	raw = strings.ReplaceAll(raw, " ", "")
@@ -65,7 +56,7 @@ func main() {
 		match = append(match, set)
 	}
 
-	// check unique player
+	// check difference between inputs
 	uniquePlayers := make(map[string]bool)
 	for _, set := range match {
 		for _, gameWinner := range set {
@@ -77,11 +68,11 @@ func main() {
 		return
 	}
 	if _, found := uniquePlayers[player1]; !found {
-		logger.Error(ErrPlayerNotFoundInMatchData)
+		logger.Errorf("not found player1's name: '%s' in match data", player1)
 		return
 	}
 	if _, found := uniquePlayers[player2]; !found {
-		logger.Error(ErrPlayerNotFoundInMatchData)
+		logger.Errorf("not found player2's name: '%s' in match data", player2)
 		return
 	}
 
