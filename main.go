@@ -95,16 +95,20 @@ func main() {
 		player2WinGameCount := 0
 		gameScores := []string{}
 
-		for setIndex, gameWinner := range set {
+		for gameIndex, gameWinner := range set {
 			player1GameScore := ""
 			player2GameScore := ""
 			BP := ""
 			SP := ""
+			player1AlmostWin := false
+			player2AlmostWin := false
+
 			if gameWinner == player1 {
 				player1WinGameCount++
 			} else {
 				player2WinGameCount++
 			}
+
 			switch player1WinGameCount {
 			case 0:
 				player1GameScore = "0"
@@ -115,6 +119,7 @@ func main() {
 			case 3:
 				player1GameScore = "40"
 			}
+
 			switch player2WinGameCount {
 			case 0:
 				player2GameScore = "0"
@@ -125,42 +130,45 @@ func main() {
 			case 3:
 				player2GameScore = "40"
 			}
+
+			switch {
+			case player1WinGameCount == 3 && player2WinGameCount < 3:
+				player1AlmostWin = true
+			case player1WinGameCount < 3 && player2WinGameCount == 3:
+				player2AlmostWin = true
+			}
+
 			if player1WinGameCount >= 3 && player2WinGameCount >= 3 {
 				switch {
 				case player1WinGameCount < player2WinGameCount:
 					player1GameScore = "40"
 					player2GameScore = "A"
-					if servePlayer == player1 {
-						BP = "BP"
-					}
-					if player1WinSetCount == 5 || player2WinSetCount == 5 {
-						SP = "SP"
-					}
+					player2AlmostWin = true
 				case player1WinGameCount > player2WinGameCount:
 					player1GameScore = "A"
 					player2GameScore = "40"
-					if servePlayer == player2 {
-						BP = "BP"
-					}
-					if player1WinSetCount == 5 || player2WinSetCount == 5 {
-						SP = "SP"
-					}
+					player1AlmostWin = true
 				default:
 					player1GameScore = "40"
 					player2GameScore = "40"
 				}
 			}
-			if (servePlayer == player2 && player1WinGameCount == 3 && player2WinGameCount < 3) ||
-				(servePlayer == player1 && player1WinGameCount < 3 && player2WinGameCount == 3) {
+
+			if player1AlmostWin && servePlayer == player2 {
 				BP = "BP"
 			}
-			if (player1WinGameCount == 3 && player2WinGameCount < 3) ||
-				(player1WinGameCount < 3 && player2WinGameCount == 3) {
+
+			if player2AlmostWin && servePlayer == player1 {
+				BP = "BP"
+			}
+
+			if player1AlmostWin || player2AlmostWin {
 				if player1WinSetCount == 5 || player2WinSetCount == 5 {
 					SP = "SP"
 				}
 			}
-			if setIndex != len(set)-1 {
+
+			if gameIndex != len(set)-1 {
 				gameScores = append(gameScores, fmt.Sprintf("%s:%s%s%s", player1GameScore, player2GameScore, BP, SP))
 			}
 		}
